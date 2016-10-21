@@ -15,6 +15,7 @@
  * along with NIF transfer library for the General Entity Annotator Benchmark.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.aksw.gerbil.io.nif.DocumentListWriter;
@@ -32,6 +33,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 import IOContent.TextReader;
+import IOContent.TextWriter;
 
 /**
  * Diese Klasse generiert NIF files aus Texten welche ein Wikimardown für Url's haben.
@@ -81,7 +83,7 @@ class AnnotedTextToNIFConverter
 	 * This method calculate and create a NIF file for a given Text with Wikipedia Markup annotations
 	 * @param path
 	 */
-	public static void doTheMagic(String path)
+	public static String doTheMagic(String path)
 	{
 		String input = TextReader.fileReader(path);
 		ArrayList<DefinitionObject> DOList = GatherAnnotationInformations.getAnnotationDefs(input);
@@ -104,35 +106,41 @@ class AnnotedTextToNIFConverter
 		// Writing our new list of documents to a String
 		NIFWriter writer = new TurtleNIFWriter();
 		String nifString = writer.writeNIF(documents);
-		System.out.println(nifString);
 
-		// After generating a NIF corpus, it can be helpful to parse the NIF using a `NIFParser` instance.
-		NIFParser parser = new TurtleNIFParser();
-		parser.parseNIF(nifString);
-
-		// Instead of text containing the NIF information, a jena RDF `Model` can be created.
-		DocumentListWriter listWriter = new DocumentListWriter();
-		Model nifModel = ModelFactory.createDefaultModel();
-		listWriter.writeDocumentsToModel(nifModel, documents);
+		//Content not necessary for my work
+		
+//		// After generating a NIF corpus, it can be helpful to parse the NIF using a `NIFParser` instance.
+//		NIFParser parser = new TurtleNIFParser();
+//		parser.parseNIF(nifString);
+//
+//		// Instead of text containing the NIF information, a jena RDF `Model` can be created.
+//		DocumentListWriter listWriter = new DocumentListWriter();
+//		Model nifModel = ModelFactory.createDefaultModel();
+//		listWriter.writeDocumentsToModel(nifModel, documents);
+		
+		return nifString;
 	}
 	
 
-	/*
-	 * Here starts the magic!
+	/**
+	 * This method starts the program workflow/magic
+	 * @param args
+	 * @throws IOException
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
 		//For static search of just 1 File
-//		String static_path = "C:/Users/Subadmin/Desktop/Test1.txt";
 		String static_path = "";
+		String defaultName = "default-out.xml";
+		int iter = 1;
 		
 		if(args.length > 0)
 		{
 			for(String cur : args)
 			{
 				try 
-				{
-					doTheMagic(cur);
+				{					
+					TextWriter.writeToProgramFolder(defaultName+"."+iter, doTheMagic(cur));
 				} catch (IllegalArgumentException iae) { iae.printStackTrace(); }
 			}
 			
@@ -141,7 +149,7 @@ class AnnotedTextToNIFConverter
 			{
 				try 
 				{
-					doTheMagic(static_path);
+					TextWriter.writeToProgramFolder(defaultName, doTheMagic(static_path));
 				} catch (IllegalArgumentException iae) { iae.printStackTrace(); }
 
 			}else{

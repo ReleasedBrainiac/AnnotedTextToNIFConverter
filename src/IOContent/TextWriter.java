@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class handle all file creation and filling for the program
+ * @author TTurke
+ *
+ */
 public class TextWriter 
 {
 	/**
@@ -65,18 +70,18 @@ public class TextWriter
 	}
 	
 	/**
-	 * This method create a file path by a given name pointng to the directory of the program
+	 * This method create a xml-file path by a given name pointing to the directory of the program
 	 * @param filename
 	 * @throws IOException 
 	 */
 	public static String createFilePathByName(String filename) throws IOException
 	{
-		return  new File(".").getCanonicalPath()+"\\"+filename;
+		return  new File(".").getCanonicalPath()+"\\"+filename+".xml";
 		
 	}
 	
 	/**
-	 * This method write the given text to a file in the parent folder with a given name
+	 * This method write the given text to a xml-file in the parent folder with a given name
 	 * @param name
 	 * @param text
 	 * @throws IOException
@@ -85,14 +90,4 @@ public class TextWriter
 	{
 		fileWriter(text,createFilePathByName(name));
 	}
-	
-	public static void main(String[] args) throws IOException 
-	{
-		String name = "test-file2.txt";
-		String text = "works";
-		writeToProgramFolder(name, text);
-		
-		deleteUniqueFile(createFilePathByName("test-file2.txt"));
-	}
-
 }
