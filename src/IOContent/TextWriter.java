@@ -32,6 +32,7 @@ public class TextWriter
 			bw.write(writeable);
 			bw.close();
 			
+			System.out.println(path);
 			System.out.println("FILE CREATED AND FILLED!");
 			
 		} catch (IOException ioe) { ioe.printStackTrace(); }

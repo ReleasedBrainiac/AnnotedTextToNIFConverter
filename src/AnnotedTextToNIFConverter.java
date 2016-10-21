@@ -139,8 +139,10 @@ class AnnotedTextToNIFConverter
 			for(String cur : args)
 			{
 				try 
-				{					
+				{	
+					System.out.println(iter);
 					TextWriter.writeToProgramFolder(defaultName+"."+iter, doTheMagic(cur));
+					iter++;
 				} catch (IllegalArgumentException iae) { iae.printStackTrace(); }
 			}
 			

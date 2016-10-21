@@ -28,13 +28,13 @@ public class GatherAnnotationInformations
 			
 			for(String cur : uris)
 			{
-				us.add(prefix+cur);
+				us.add(prefix+cur.replace(" ", "_"));
 			}
 		
 			
 		}else{
 			
-			us.add(prefix+Annotation);
+			us.add(prefix+Annotation.replace(" ", "_"));
 			
 		}	
 		
