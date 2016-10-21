@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import IOContent.TextReader;
+
 /**
  * Diese Klasse sammelt alle Informationen bzgl. jeder Annotation aus einem Text, 
  * und Speichert diese in einer Liste von DefinitionObject(s).

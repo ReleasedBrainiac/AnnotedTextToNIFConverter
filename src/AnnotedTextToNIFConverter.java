@@ -31,6 +31,8 @@ import org.junit.Ignore;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+import IOContent.TextReader;
+
 /**
  * Diese Klasse generiert NIF files aus Texten welche ein Wikimardown für Url's haben.
  * Basierend auf einem Beispiel von Michael Röder (roeder@informatik.uni-leipzig.de)
